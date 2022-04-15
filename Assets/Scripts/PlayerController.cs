@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-        public float playerSpeed = 1f;
+    public float playerSpeed = 1f;
     private Rigidbody rb;
     private float newXPosition;
     private float playerXSpeed = 5f;
@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private Transform rotTrans;
     private Vector3 newRotation;
     private Transform newTransform;
+    private float lastFrameFingerPositionX;
+    private float moveFactorX;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -40,15 +43,35 @@ public class PlayerController : MonoBehaviour
             //newTransform.eulerAngles= new Vector3(0, 0, 0);
             cam.transform.eulerAngles = newRotation;
 
-           // Quaternion.RotateTowards(cam.transform.rotation,newTransform.rotation, 30f);
-            
-
+            // Quaternion.RotateTowards(cam.transform.rotation,newTransform.rotation, 30f);
 
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            lastFrameFingerPositionX = Input.mousePosition.x;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            moveFactorX = Input.mousePosition.x - lastFrameFingerPositionX;
+            lastFrameFingerPositionX = Input.mousePosition.x;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            moveFactorX = 0f;
+        }
+
+       // newXPosition = transform.position.x + moveFactorX * playerXSpeed;
+
+
+
     }
     private void FixedUpdate()
     {
-        xMovement = transform.position.x + playerXSpeed * Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime;
+        //xMovement = transform.position.x + playerXSpeed * Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime;
+       
+        xMovement = transform.position.x + playerXSpeed * moveFactorX * Time.fixedDeltaTime;
+
         rb.MovePosition(new Vector3(xMovement, 0, transform.position.z + playerSpeed * Time.fixedDeltaTime));
         //restart the game eklenecek
         //sýnýrýn dýþýna ne olacaðýna karar verilecek
@@ -73,7 +96,7 @@ public class PlayerController : MonoBehaviour
             //en son dokunmanýn yönünde ekstra kuvvet oluþturuyor
         }
     }
-    
+
     private void OnCollisionStay(Collision other)
     {
         if (other.gameObject.tag == "RotStick")
@@ -83,6 +106,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log(lastNormal);
         }
     }
+
+
 
 }
 
