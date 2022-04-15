@@ -11,8 +11,8 @@ public class GameRules : MonoBehaviour
     public float rightBorder;
     void Start()
     {
-        rightBorder = gamePlatform.transform.localScale.z / 4;
-            leftBorder = -rightBorder;
+        //rightBorder = gamePlatform.transform.localScale.z / 4;
+          //  leftBorder = -rightBorder;
     }
 
     // Update is called once per frame

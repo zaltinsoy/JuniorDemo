@@ -7,17 +7,22 @@ public class PlayerController : MonoBehaviour
         public float playerSpeed = 1f;
     private Rigidbody rb;
     private float newXPosition;
-    private float playerXSpeed = 2f;
+    private float playerXSpeed = 5f;
     private float xMovement;
 
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
     private int numberContact;
     private Vector3 lastNormal;
-
+    private float finishLine = 50f;
+    public GameObject cam;
+    private Transform rotTrans;
+    private Vector3 newRotation;
+    private Transform newTransform;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
@@ -27,6 +32,19 @@ public class PlayerController : MonoBehaviour
         {
             newXPosition = transform.position.x + Input.GetAxisRaw("Horizontal") * playerXSpeed;
         }
+
+        if (transform.position.z >= finishLine)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            newRotation = new Vector3(0, 0, 0);
+            //newTransform.eulerAngles= new Vector3(0, 0, 0);
+            cam.transform.eulerAngles = newRotation;
+
+           // Quaternion.RotateTowards(cam.transform.rotation,newTransform.rotation, 30f);
+            
+
+
+        }
     }
     private void FixedUpdate()
     {
@@ -34,6 +52,7 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(new Vector3(xMovement, 0, transform.position.z + playerSpeed * Time.fixedDeltaTime));
         //restart the game eklenecek
         //sýnýrýn dýþýna ne olacaðýna karar verilecek
+
 
     }
 
@@ -64,5 +83,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log(lastNormal);
         }
     }
+
 }
 
