@@ -15,7 +15,7 @@ public class PaintWall : MonoBehaviour
      //   GetComponent<SpriteRenderer>().material.mainTexture = texture;
 
 
-
+        // Apply initial color to the wall
         for (int y = 0; y < texture.height; y++)
         {
             for (int x = 0; x < texture.width; x++)
