@@ -42,46 +42,18 @@ public class PlayerController : MonoBehaviour
         xMovement = transform.position.x + playerXSpeed * moveFactorX * Time.fixedDeltaTime;
 
         Vector3 movementDirection = new Vector3(xMovement, 0, transform.position.z + playerSpeed * Time.fixedDeltaTime);
-
-        //rb.MovePosition(new Vector3(xMovement, 0, transform.position.z + playerSpeed * Time.fixedDeltaTime));
-
         rb.MovePosition(movementDirection);
 
         Vector3 rotateDirection = movementDirection.normalized;
 
+        //it is working but speed is not correct
         if(movementDirection!=Vector3.zero)
         {
-         //   transform.forward = rotateDirection; //çalýþýyor valla bu ama daha hýzlýsý lazým bize 
             Quaternion toRotation = Quaternion.LookRotation(movementDirection,Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, RotationSpeed * Time.fixedDeltaTime);
         }
-        /*
-        if (moveFactorX != 0)
-        {
-            Debug.Log("dönme hareketi");
-
-            deltaRotation = Quaternion.Euler(0, 10 * playerXSpeed * moveFactorX * Time.fixedDeltaTime, 0);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-
-
-        }
-        */
-        else if (moveFactorX == 0)
-        {
-            Debug.Log(moveFactorX + "niye çalýþmýyor");
-
-            
-            //Quaternion deltaForward = Quaternion.Euler(0, -(transform.localEulerAngles.y), 0);
-           
-            //rb.MoveRotation(rb.rotation * deltaForward);
-            //Quaternion backRotate= Quaternion.Euler(0, 10 * playerXSpeed * -moveFactorX * Time.fixedDeltaTime, 0);
-            
-            //rb.MoveRotation(rb.rotation * deltaForward);
-
-        }
-
-
-
+      
+      
         // Swerve type movement input
         if (Input.GetMouseButtonDown(0))
         {

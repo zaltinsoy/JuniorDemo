@@ -38,7 +38,6 @@ public class WallPainter : MonoBehaviour
 
             Renderer rend = hit.transform.GetComponent<Renderer>();
             MeshCollider meshCollider = hit.collider as MeshCollider;
-            Debug.Log("vurdu");
 
             if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
                 return;
@@ -46,7 +45,6 @@ public class WallPainter : MonoBehaviour
             tex = rend.material.mainTexture as Texture2D;
             Color[] pixels = tex.GetPixels(0);
 
-            Debug.Log("deneme");
 
             // Convert color information to grayscale
             float[] floatArray = new float[pixels.Length];
@@ -60,13 +58,12 @@ public class WallPainter : MonoBehaviour
             double blueColor = floatArray.Count(s => s > 0.150);
             double redPercent = blueColor / (redColor + blueColor) * (100d);
             // Update the text
-            perText.text = "Red: %" + redPercent.ToString("0.#");
+            perText.text = "Red: " +redPercent.ToString("0.#")+"%";
 
             Vector2 pixelUV = hit.textureCoord;
             pixelUV.x *= tex.width;
             pixelUV.y *= tex.height;
 
-            Debug.Log("redpercent" + redPercent);
             tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.red);
             tex.Apply();
 

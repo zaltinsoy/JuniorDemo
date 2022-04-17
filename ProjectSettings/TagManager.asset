@@ -7,6 +7,7 @@ TagManager:
   - Reseter
   - Stick
   - RotStick
+  - Oppo
   layers:
   - Default
   - TransparentFX
