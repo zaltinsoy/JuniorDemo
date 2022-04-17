@@ -3,11 +3,11 @@ using System.Collections;
 using System.Linq;
 using UnityEngine.UI;
 using System;
+// Paint the wall after finish line
 
 public class WallPainter : MonoBehaviour
 {
     public Texture2D tex;
-
     public Camera cam;
     public float[] colorSum;
     public Text perText;
@@ -24,14 +24,14 @@ public class WallPainter : MonoBehaviour
 
     void Update()
     {
-      
+
 
         if (transform.position.z > finishLine - 20)
         {
-            
+
             if (!Input.GetMouseButton(0))
                 return;
-            
+
             RaycastHit hit;
             if (!Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit))
                 return;
@@ -47,7 +47,6 @@ public class WallPainter : MonoBehaviour
             Color[] pixels = tex.GetPixels(0);
 
             Debug.Log("deneme");
-
 
             // Convert color information to grayscale
             float[] floatArray = new float[pixels.Length];
@@ -67,25 +66,11 @@ public class WallPainter : MonoBehaviour
             pixelUV.x *= tex.width;
             pixelUV.y *= tex.height;
 
-
             Debug.Log("redpercent" + redPercent);
             tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.red);
             tex.Apply();
 
         }
-        //if ( transform.eulerAngles.y!=0)
-        //{
-        //    // transform.eulerAngles = transform.parent.eulerAngles- new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
-        //    //transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
-        //}
 
-       // transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
-
-       // camAngle = transform.eulerAngles.y;
-       // parentAngle = transform.parent.eulerAngles.y;
-
-        //camLocalAngle = transform.localEulerAngles.y;  
-
-       // transform.parent
     }
 }

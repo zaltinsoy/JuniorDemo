@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
+// Apply initial color to the wall
+
 public class WallColor : MonoBehaviour
 {
     Texture2D texture;
@@ -10,7 +12,6 @@ public class WallColor : MonoBehaviour
         texture = new Texture2D(256, 256);
         GetComponent<Renderer>().material.mainTexture = texture;
 
-        // Apply initial color to the wall
         for (int y = 0; y < texture.height; y++)
         {
             for (int x = 0; x < texture.width; x++)

@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class OpMove : MonoBehaviour
+public class OppoMove : MonoBehaviour
 {
 
-    
     public NavMeshAgent agent;
     private Rigidbody rb;
 
@@ -15,13 +14,11 @@ public class OpMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-
     }
     void Update()
     {
-        agent.SetDestination(new Vector3 (0, 0, 149));
-        if(transform.position.z>147)
+        agent.SetDestination(new Vector3(0, 0, 149));
+        if (transform.position.z > 147)
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -30,14 +27,13 @@ public class OpMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Send opponents to the start location
         if (other.CompareTag("Reseter"))
         {
-            //transform.position = new Vector3(0, 0, 0);
             transform.position = new Vector3(transform.position.x, 0, 0);
         }
 
     }
-    //son anda ittirmesi daha güzel oldu önce dönüyor çýkýþta fýrlatýyor
     private void OnTriggerExit(Collider other)
     {
         // Rotstick apply extra force on the player in the direction of last contact normal
