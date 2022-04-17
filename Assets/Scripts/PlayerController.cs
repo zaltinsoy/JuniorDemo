@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 endTouchPosition;
     private int numberContact;
     private Vector3 lastNormal;
-    private float finishLine = 50f;
+    private float finishLine = 150f;
     public GameObject cam;
     private Transform rotTrans;
     private Vector3 newRotation;
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             //cam.transform.eulerAngles = newRotation;
 
             // Quaternion.RotateTowards(cam.transform.rotation,newTransform.rotation, 30f);
-            cam.transform.position = new Vector3(0, 6, 43);
+            cam.transform.position = new Vector3(0, 6, finishLine-7);
             cam.transform.LookAt(wall.transform);
 
         }
