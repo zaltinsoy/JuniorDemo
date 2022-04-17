@@ -16,10 +16,15 @@ public class OpMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+
     }
     void Update()
     {
-        agent.SetDestination(new Vector3 (0, 0, 150));
+        agent.SetDestination(new Vector3 (0, 0, 149));
+        if(transform.position.z>147)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 
 

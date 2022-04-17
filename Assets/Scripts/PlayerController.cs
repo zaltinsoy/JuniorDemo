@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             //cam.transform.eulerAngles = newRotation;
 
             // Quaternion.RotateTowards(cam.transform.rotation,newTransform.rotation, 30f);
-            cam.transform.position = new Vector3(0, 6, finishLine-7);
+            cam.transform.position = new Vector3(0, 8, finishLine-7);
             cam.transform.LookAt(wall.transform);
 
         }
@@ -89,7 +89,11 @@ public class PlayerController : MonoBehaviour
        
         xMovement = transform.position.x + playerXSpeed * moveFactorX * Time.fixedDeltaTime;
 
+        Quaternion deltaRotation = Quaternion.Euler(0, 100*playerXSpeed * moveFactorX * Time.fixedDeltaTime,0);
+       // rb.MoveRotation(rb.rotation * deltaRotation);
+
         rb.MovePosition(new Vector3(xMovement, 0, transform.position.z + playerSpeed * Time.fixedDeltaTime));
+      
         
         //restart the game eklenecek
         
@@ -116,6 +120,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Reseter"))
         {
             transform.position = new Vector3(0, 0, 0);
+           // transform.rotation.eulerAngles = new Vector3(0, 0, 0);
+            transform.localEulerAngles = new Vector3(0, 0);
         }
 
     }

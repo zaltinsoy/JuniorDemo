@@ -14,7 +14,9 @@ public class WallPainter : MonoBehaviour
     public GameObject playerBoy;
     public float endGame;
     private float finishLine = 150f;
-
+    public float camAngle;
+    public float parentAngle;
+    public float camLocalAngle;
 
     void Start()
     {
@@ -66,6 +68,19 @@ public class WallPainter : MonoBehaviour
             tex.Apply();
 
         }
+        if ( transform.eulerAngles.y!=0)
+        {
+            // transform.eulerAngles = transform.parent.eulerAngles- new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+            //transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+        }
 
+       // transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+
+        camAngle = transform.eulerAngles.y;
+        parentAngle = transform.parent.eulerAngles.y;
+
+        camLocalAngle = transform.localEulerAngles.y;  
+
+       // transform.parent
     }
 }
